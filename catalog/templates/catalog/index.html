@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>Local Library</title>
-</head>
-<body>
-    <h1>Local Library Home</h1>
+{% extends "catalog/base_generic.html" %}
 
-    <p>Books: {{ num_books }}</p>
-    <p>Book Instances: {{ num_instances }}</p>
-    <p>Authors: {{ num_authors }}</p>
-    <p>Genres: {{ num_genres }}</p>
-    <p>Available Copies: {{ num_instances_available }}</p>
-    <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
-</body>
-</html>
+{% block content %}
+
+  <h1>Local Library Home</h1>
+
+  <p>Books: {{ num_books }}</p>
+  <p>Book Instances: {{ num_instances }}</p>
+  <p>Authors: {{ num_authors }}</p>
+  <p>Genres: {{ num_genres }}</p>
+  <p>Available Copies: {{ num_instances_available }}</p>
+  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+{% endblock %}

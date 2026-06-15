@@ -1,0 +1,74 @@
+body {
+    margin: 20px;
+}
+nav {
+    background-color: greenyellow;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+nav a{
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+nav a:hover {
+    color: red;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 20px gray;
+}
+.book-list {
+    list-style-type: none;
+}
+.book-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+.book-list li:hover {
+    background-color: #e0e0e0;
+}
+.book-list li::before {
+    content: "📚";
+    margin-right: 10px;
+}
+.author-list {
+    list-style-type: none;
+}
+.author-list li {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+.author-list li:hover {
+    background-color: #f9f9f9;
+}
+.author-list li::before {
+    content: "👤";
+    margin-right: 10px;
+}
+.detail-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+.detail-card h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.detail-card p {
+    margin-bottom: 10px;
+}

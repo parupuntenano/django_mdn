@@ -1,11 +1,39 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Local Library</title>
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'catalog/style.css' %}">
 </head>
 <body>
+  <div class="container">
+    <h1>Local Library</h1>
+
+  <nav>
+    <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'books' %}">Books</a>
+    <a href="{% url 'authors' %}">Authors</a>
+    
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'my-borrowed' %}">My Borrowed Books</a>
+        {{ user.username }}
+      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </nav>
+
+  <hr>
+
   {% block content %}
+</div>
   {% endblock %}
 </body>
 </html>

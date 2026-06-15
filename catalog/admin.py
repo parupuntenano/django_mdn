@@ -40,6 +40,7 @@ class BookAdmin(admin.ModelAdmin):
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = (
         'book',
+        'borrower',
         'status',
         'due_back',
         'id',
