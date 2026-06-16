@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Genre(models.Model):
@@ -117,3 +118,33 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return f"{self.id} ({self.book.title})"
+    
+class Review(models.Model):
+    book = models.ForeignKey(
+        "Book",
+        on_delete=models.CASCADE,
+        related_name="reviews",
+    )
+
+    reviewer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    
+    rating = models.IntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5),
+        ]
+    )
+
+    comment = models.TextField(
+        max_length=1000,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    def __str__(self):
+        return f"{self.book.title} - {self.rating}"

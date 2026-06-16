@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Genre, Author, Book, BookInstance
+from .models import Genre, Author, Book, BookInstance, Review
 
 
 admin.site.register(Genre)
@@ -50,3 +50,5 @@ class BookInstanceAdmin(admin.ModelAdmin):
         'status',
         'due_back',
     )
+
+admin.site.register(Review)

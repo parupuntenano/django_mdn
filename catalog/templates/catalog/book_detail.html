@@ -7,5 +7,23 @@
   <p><strong>Author:</strong> {{ book.author }}</p>
   <p><strong>Summary:</strong> {{ book.summary }}</p>
   <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+
+  <a href="{% url 'add-review' book.pk %}">Add review</a>
 </div>
+
+{% if book.reviews.all %}
+<ul>
+  {% for review in book.reviews.all %}
+    <li>
+      <strong>{{ review.rating }}/5</strong>
+      by {{ review.reviewer }}
+      <br>
+      {{ review.comment }}
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>No reviews yet.</p>
+{% endif %}
+
 {% endblock %}

@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>Author List</h1>
+  <p>
+    <a href="{% url 'author-create' %}">Add author</a>
+  </p>
 
   {% if author_list %}
     <ul class="author-list">
