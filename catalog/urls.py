@@ -16,4 +16,5 @@ urlpatterns = [
     path("book/<int:pk>/review/",views.add_review,name="add-review",),
     path("book/<int:pk>/reserve/",views.reserve_book,name="reserve-book",),
     path("my-reservations/",views.MyReservationsListView.as_view(),name="my-reservations",),
+    path("reservation/<int:pk>/cancel/",views.cancel_reservation,name="cancel-reservation"),
 ]

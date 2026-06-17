@@ -16,6 +16,10 @@
   <h2>Books</h2>
 
 {% for book in author.book_set.all %}
-  <p>{{ book.title }}</p>
+  <p>
+    <a href="{{ book.get_absolute_url }}">
+      {{ book.title }}
+    </a>
+  </p>
 {% endfor %}
 {% endblock %}

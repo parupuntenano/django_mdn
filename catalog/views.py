@@ -189,3 +189,17 @@ class MyReservationsListView(LoginRequiredMixin, generic.ListView):
         return Reservation.objects.filter(
             user=self.request.user
         ).order_by("-created_at")
+
+@login_required
+def cancel_reservation(request, pk):
+    reservation = get_object_or_404(
+        Reservation,
+        pk=pk,
+        user=request.user,
+    )
+
+    reservation.delete()
+
+    return HttpResponseRedirect(
+        reverse("my-reservations")
+    )
