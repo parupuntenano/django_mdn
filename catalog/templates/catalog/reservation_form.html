@@ -1,0 +1,17 @@
+{% extends "catalog/base_generic.html" %}
+
+{% block content %}
+  <h1>Reserve: {{ book.title }}</h1>
+
+  <div class="detail-card">
+    <p><strong>Book:</strong> {{ book.title }}</p>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+  </div>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Reserve">
+  </form>
+{% endblock %}

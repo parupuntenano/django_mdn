@@ -72,3 +72,15 @@ h1 {
 .detail-card p {
     margin-bottom: 10px;
 }
+.review-stars {
+    color: gold;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+.error-box {
+    border: 1px solid red;
+    background-color: #ffe6e6;
+    color: red;
+    padding: 10px;
+    margin-bottom: 20px;
+}

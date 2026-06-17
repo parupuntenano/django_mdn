@@ -20,6 +20,7 @@
 
     {% if user.is_authenticated %}
       <a href="{% url 'my-borrowed' %}">My Borrowed Books</a>
+      <a href="{% url 'my-reservations' %}">My Reservations</a>
         {{ user.username }}
       <form action="{% url 'logout' %}" method="post" style="display:inline;">
         {% csrf_token %}
@@ -33,7 +34,7 @@
   <hr>
 
   {% block content %}
-</div>
   {% endblock %}
+</div>
 </body>
 </html>

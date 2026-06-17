@@ -3,6 +3,12 @@
 {% block content %}
   <h1>Review: {{ book.title }}</h1>
 
+  {% if error_message %}
+    <div class="error-box">
+      {{ error_message }}
+    </div>
+  {% endif %}
+
   <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}

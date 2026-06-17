@@ -1,0 +1,24 @@
+{% if reservations %}
+  {% for reservation in reservations %}
+
+    <div class="reservation-card">
+
+      <h3>📚 {{ reservation.book.title }}</h3>
+
+      <p>
+        <strong>貸出希望日:</strong>
+        {{ reservation.reserved_date }}
+      </p>
+
+      <p>
+        <strong>予約日時:</strong>
+        {{ reservation.created_at }}
+      </p>
+
+    </div>
+
+  {% endfor %}
+
+{% else %}
+  <p>No reservations.</p>
+{% endif %}

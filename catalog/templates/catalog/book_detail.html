@@ -9,17 +9,37 @@
   <p><strong>ISBN:</strong> {{ book.isbn }}</p>
 
   <a href="{% url 'add-review' book.pk %}">Add review</a>
+
+  <br><br>
+
+<a href="{% url 'reserve-book' book.pk %}">
+  Reserve Book
+</a>
+
 </div>
 
 {% if book.reviews.all %}
 <ul>
   {% for review in book.reviews.all %}
     <li>
-      <strong>{{ review.rating }}/5</strong>
-      by {{ review.reviewer }}
-      <br>
-      {{ review.comment }}
-    </li>
+  <strong class="review-stars">
+    {% if review.rating == 5 %}
+      ★★★★★
+    {% elif review.rating == 4 %}
+      ★★★★☆
+    {% elif review.rating == 3 %}
+      ★★★☆☆
+    {% elif review.rating == 2 %}
+      ★★☆☆☆
+    {% elif review.rating == 1 %}
+      ★☆☆☆☆
+    {% endif %}
+  </strong>
+
+  <br>
+
+  {{ review.comment }}
+</li>
   {% endfor %}
 </ul>
 {% else %}

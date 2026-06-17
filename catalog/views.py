@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from .models import Book, Author, Genre, BookInstance
+from .models import Book, Author, Genre, BookInstance, Review, Reservation
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from .forms import RenewBookForm, ReviewForm
+from .forms import RenewBookForm, ReviewForm, ReservationForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import permission_required
@@ -124,6 +124,17 @@ class AuthorDelete(DeleteView):
 def add_review(request, pk):
     book = get_object_or_404(Book, pk=pk)
 
+    if Review.objects.filter(book=book, reviewer=request.user).exists():
+        return render(
+            request,
+            "catalog/review_form.html",
+            {
+                "form": ReviewForm(),
+                "book": book,
+                "error_message": "この本には既にレビューを投稿しています。"
+            }
+        )
+
     if request.method == "POST":
         form = ReviewForm(request.POST)
 
@@ -145,3 +156,36 @@ def add_review(request, pk):
             "book": book,
         },
     )
+@login_required
+def reserve_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
+    if request.method == "POST":
+        form = ReservationForm(request.POST)
+
+        if form.is_valid():
+            reservation = form.save(commit=False)
+            reservation.book = book
+            reservation.user = request.user
+            reservation.save()
+            return HttpResponseRedirect(book.get_absolute_url())
+    else:
+        form = ReservationForm()
+    return render(
+        request,
+        "catalog/reservation_form.html",
+        {
+            "form": form,
+            "book": book,
+        },
+    )
+
+class MyReservationsListView(LoginRequiredMixin, generic.ListView):
+    model = Reservation
+    template_name = "catalog/my_reservations.html"
+    context_object_name = "reservations"
+
+    def get_queryset(self):
+        return Reservation.objects.filter(
+            user=self.request.user
+        ).order_by("-created_at")
